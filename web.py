@@ -1717,10 +1717,50 @@ def main():
     handler(api_client, settings)
 
 
+# ─────────────────────────────────────────────────────────
+#  Embedded FastAPI backend — used on Streamlit Community Cloud
+#  (starts uvicorn in a background thread so both services run
+#   in a single process without needing Railway / Render).
+# ─────────────────────────────────────────────────────────
+
+@st.cache_resource(show_spinner="Starting backend server…")
+def _start_backend_server() -> bool:
+    """Launch the FastAPI app in a daemon thread and wait until it is ready.
+
+    Returns True on success, False on timeout.
+    Decorated with st.cache_resource so it is called only once per process.
+    """
+    import threading
+    import uvicorn
+    from app import app as _fastapi_app
+
+    port = config.api.app_port
+
+    def _run():
+        uvicorn.run(_fastapi_app, host="127.0.0.1", port=port, log_level="error")
+
+    thread = threading.Thread(target=_run, daemon=True)
+    thread.start()
+
+    # Poll until the backend accepts connections (max 45 s)
+    for _ in range(45):
+        try:
+            requests.get(f"http://127.0.0.1:{port}/v1/tasks/queue/status", timeout=1)
+            return True
+        except Exception:
+            time.sleep(1)
+    return False  # timed out — API calls will fail gracefully in the UI
+
+
 # Use API_BASE_URL env var when deployed (Railway, Render, Streamlit Cloud).
 # Falls back to localhost for local development.
 _default_base = f"http://localhost:{config.api.app_port}"
 base_url = os.environ.get("API_BASE_URL", _default_base).rstrip("/")
+
+# When no external backend URL is configured, start the embedded backend.
+if not os.environ.get("API_BASE_URL"):
+    _start_backend_server()
+
 api_client = TaskAPIClient(base_url)
 
 if __name__ == "__main__":
