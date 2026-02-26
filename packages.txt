@@ -1,0 +1,4 @@
+ffmpeg
+libsndfile1
+fonts-noto
+fonts-noto-cjk

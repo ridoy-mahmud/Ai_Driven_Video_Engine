@@ -1717,7 +1717,10 @@ def main():
     handler(api_client, settings)
 
 
-base_url = f"http://localhost:{config.api.app_port}"
+# Use API_BASE_URL env var when deployed (Railway, Render, Streamlit Cloud).
+# Falls back to localhost for local development.
+_default_base = f"http://localhost:{config.api.app_port}"
+base_url = os.environ.get("API_BASE_URL", _default_base).rstrip("/")
 api_client = TaskAPIClient(base_url)
 
 if __name__ == "__main__":

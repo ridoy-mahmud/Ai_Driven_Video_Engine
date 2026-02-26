@@ -1,0 +1,32 @@
+services:
+  # FastAPI Backend
+  - type: web
+    name: ai-video-engine-api
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: API_BASE_URL
+        fromService:
+          type: web
+          name: ai-video-engine-api
+          property: host
+    autoDeploy: true
+
+  # Streamlit Frontend
+  - type: web
+    name: ai-video-engine-ui
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "streamlit run web.py --server.port $PORT --server.headless true --server.enableCORS false"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: API_BASE_URL
+        fromService:
+          type: web
+          name: ai-video-engine-api
+          property: host
+    autoDeploy: true

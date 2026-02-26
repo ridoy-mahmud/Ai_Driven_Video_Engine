@@ -1,0 +1,12 @@
+# Nixpacks configuration for Railway
+# Installs system packages like ffmpeg needed for video generation
+
+[phases.setup]
+nixPkgs = ["ffmpeg", "libsndfile"]
+aptPkgs = []
+
+[phases.install]
+cmds = ["pip install -r requirements.txt"]
+
+[start]
+cmd = "uvicorn app:app --host 0.0.0.0 --port $PORT"
