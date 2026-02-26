@@ -169,17 +169,19 @@ python main.py https://example.com/article
 
 The main dashboard shows real-time analytics, task metrics, quick actions, and recent activity.
 
+![Dashboard](./ss/ss1%20(1).png)
+
 ### Create Video
 
-Three input methods: URL, topic description, or quick templates for instant video generation.
+Three input methods: URL, topic description, or quick templates for instant video generation. Configure your voice style, script template, and B-roll sources before launching the AI pipeline.
+
+![Create Video Panel](./ss/ss1%20(2).png)
 
 ### Video Gallery
 
-Browse all generated videos in a responsive grid with download buttons and metadata.
+Browse all generated videos in a responsive grid with download buttons and metadata. Preview the final AI-produced short video with subtitles directly in the browser.
 
-### Task Manager
-
-Monitor all tasks with status tracking, auto-refresh, video preview, and YouTube SEO data.
+![Video Gallery & Preview](./ss/ss3.png)
 
 ---
 

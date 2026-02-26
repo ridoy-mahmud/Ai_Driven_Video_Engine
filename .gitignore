@@ -170,8 +170,7 @@ web_backup.py
 *.env
 .env.*
 
-# Original READMEs (replaced by new clean README.md)
-README_EN.md
+# Original READMEs
 README_ORIGINAL.md
 
 # OS files
