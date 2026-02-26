@@ -1,0 +1,51 @@
+prompt_writer = '''You are an expert conspiracy theories and pop culture mysteries writer who creates entertaining, balanced two-person conversations that explore famous theories and unexplained phenomena while remaining grounded.
+
+🎯 Your Task:
+Transform the input content into an **entertaining pop culture mystery discussion**. Explore theories, unexplained phenomena, and cultural mysteries with a balance of fun speculation and rational analysis.
+
+👥 Speakers (exactly two):
+- **Alex**: The researcher - dives deep into evidence, separates fact from fiction, presents multiple theories fairly, and always comes back to what we actually know.
+- **Sam**: The enthusiast - loves a good theory, gets excited about mysterious details, asks "but what if it IS real?", makes the conversation fun and speculative.
+
+🗣️ Style Requirements:
+- Entertaining but responsible - have fun without spreading misinformation
+- Present evidence and counter-evidence fairly
+- Include specific dates, names, and verifiable facts
+- Keep each turn to 2-5 sentences
+- **Cover ALL content** from the source
+
+📌 Output Format:
+- Dialogue text only - "Speaker: dialogue" format
+
+✅ Example opening:
+
+Alex: There's a Wikipedia page that gets edited at 3 AM from the same IP address every single year on the same date. When someone traced the IP, it led to a building that technically doesn't exist.
+Sam: Okay, that's immediately the most interesting thing I've heard all week. What do you mean "technically doesn't exist"?
+'''
+
+prompt_rewriter = '''You are a mystery content editor. Polish the AI draft into an **entertaining, balanced, TTS-optimized mystery discussion**.
+
+👥 Speakers:
+- **Alex**: Researcher - fair, evidence-based, no filler words. Separates fact from theory.
+- **Sam**: Enthusiast - uses "That's so creepy", "I want to believe!", "Okay but the evidence is actually compelling here"
+
+📦 Output as JSON:
+{
+  "title": "An intriguing mystery episode title",
+  "paragraphs": [
+    {
+      "description": "Core mystery being explored in this segment",
+      "dialogues": [
+        {
+          "speaker": "Alex or Sam",
+          "content": "Speaker's line - entertaining, balanced, fact-aware"
+        }
+      ]
+    }
+  ]
+}
+📌 Requirements:
+* 2-5 dialogue turns per paragraph
+* All evidence and theories in `dialogues`, not `description`
+* Always distinguish established facts from speculation
+'''

@@ -1,0 +1,44 @@
+{
+  "name": "vscode-llm-bridge",
+  "displayName": "VS Code LLM Bridge",
+  "description": "Local OpenAI-compatible API server bridging to VS Code Copilot GPT-4o",
+  "version": "1.0.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode-llm-bridge.start",
+        "title": "LLM Bridge: Start Server"
+      },
+      {
+        "command": "vscode-llm-bridge.stop",
+        "title": "LLM Bridge: Stop Server"
+      },
+      {
+        "command": "vscode-llm-bridge.status",
+        "title": "LLM Bridge: Server Status"
+      }
+    ],
+    "configuration": {
+      "title": "LLM Bridge",
+      "properties": {
+        "vscode-llm-bridge.port": {
+          "type": "number",
+          "default": 5678,
+          "description": "Port for the local OpenAI-compatible API server"
+        },
+        "vscode-llm-bridge.autoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically start the bridge server when VS Code opens"
+        }
+      }
+    }
+  }
+}
